@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ファイル選択</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 30px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .file-select-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    /* 本来のinput[type="file"]を隠す */
+    #file-input {
+      display: none;
+    }
+    /* ブラウザ・OSに依存しないカスタム「参照」ボタン */
+    .btn-browse {
+      background-color: #2b547e;
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      user-select: none;
+      display: inline-block;
+    }
+    .btn-browse:hover {
+      background-color: #1d3956;
+    }
+    /* 選択されたファイル名の表示欄 */
+    #file-name {
+      font-size: 14px;
+      color: #333333;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+
+  <h3>ファイル選択</h3>
+
+  <div class="file-select-area">
+    <!-- 本来のボタンは非表示 -->
+    <input type="file" id="file-input">
+    
+    <!-- label要素でinputをキックする（ボタン名を「参照」に固定） -->
+    <label for="file-input" class="btn-browse">参照</label>
+    
+    <!-- ファイル名表示用エリア -->
+    <span id="file-name">選択されていません</span>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('file-input');
+    const fileNameDisplay = document.getElementById('file-name');
+
+    fileInput.addEventListener('change', (event) => {
+      const files = event.target.files;
+      if (files.length > 0) {
+        fileNameDisplay.textContent = files[0].name;
+      } else {
+        fileNameDisplay.textContent = '選択されていません';
+      }
+    });
+  </script>
+
+</body>
+</html>
